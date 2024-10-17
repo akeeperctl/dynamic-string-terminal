@@ -1,0 +1,4 @@
+# Specify *filepatterns you want git to ignore.
+*.vs
+*x64
+*win32
