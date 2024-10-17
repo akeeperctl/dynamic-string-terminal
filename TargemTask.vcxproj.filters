@@ -5,10 +5,24 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Strings">
+      <UniqueIdentifier>{edd2de09-f616-4246-bc4f-2dac48177ce5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TargemTask.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="String.cpp">
+      <Filter>Strings</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="String.h">
+      <Filter>Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="cstrings_library.h">
+      <Filter>Strings</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
