@@ -118,6 +118,8 @@ int String::compare(const String& other) const
 		}
 	}
 
+	return 0;
+
 	// проверка разницы размера строк
 	//if (*pMyBegin == 0 && *pOtherBegin == 0)
 	//{
