@@ -81,6 +81,11 @@ public:
 		}
 
 		return true;
+	};	
+	
+	operator const char*()
+	{
+		return m_storage;
 	};
 
 	bool clear();
@@ -94,7 +99,7 @@ private:
 	char* m_storage;
 };
 
-inline String operator + (String& str1, const String& str2)
+inline String operator + (const String& str1, const String& str2)
 {
 	const int str1Len = str1.length();
 	const int str2Len = str2.length();
