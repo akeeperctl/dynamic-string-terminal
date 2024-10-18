@@ -99,7 +99,7 @@ inline String operator + (String& str1, const String& str2)
 	const int str1Len = str1.length();
 	const int str2Len = str2.length();
 
-	char* resizedStorage = new char[str1Len + str2Len];
+	char* resizedStorage = new char[str1Len + str2Len + 1];
 	char* pResizedBegin = resizedStorage;
 
 	const char* pStr1Begin = str1.c_str();
