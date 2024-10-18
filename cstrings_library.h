@@ -25,6 +25,18 @@ namespace cstrings
             len++;
 
         return len;
-    }
+    }    
+    
+    /// @brief Делает букву строчной
+    inline char lower(char ch)
+    {
+        // Если буква заглавная 
+        if (ch >= 65 && ch <= 90)
+        {
+            // Меняем букву на строчную
+            ch += 32;
+        }
 
+        return ch;
+    }    
 }

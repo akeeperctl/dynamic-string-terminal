@@ -21,7 +21,7 @@ public:
 
 		clear();
 
-		m_storage = new char[other.length()];
+		m_storage = new char[other.length() + 1];
 
 		char* pMyBegin = this->m_storage;
 		const char* pOtherBegin = other.c_str();
@@ -41,7 +41,7 @@ public:
 		const int myLen = this->length();
 		const int otherLen = other.length();
 
-		char* resizedStorage = new char[myLen + otherLen];
+		char* resizedStorage = new char[myLen + otherLen + 1];
 		char* pResizedBegin = resizedStorage;
 		char* pMyBegin = m_storage;
 		const char* pOtherBegin = other.c_str();
@@ -63,7 +63,7 @@ public:
 		return *this;
 	};
 
-	bool operator == (const String& other)
+	bool operator == (const String& other) const
 	{
 		const int myLen = this->length();
 		const int otherLen = other.length();
@@ -81,16 +81,42 @@ public:
 		}
 
 		return true;
+	};		
+	
+	bool operator > (const String& other) const 
+	{
+		return compare(other) == 1;
 	};	
 	
-	operator const char*()
+	bool operator < (const String& other) const
+	{
+		return compare(other) == -1;
+	};	
+	
+	operator const char*() const
 	{
 		return m_storage;
 	};
 
+	/// @brief Сравнивает 2 строки в лексикографическом порядке без учета заглавной буквы
+	/// @return  1 - текущая строка больше
+	/// @return  0 - строки одинаковые
+	/// @return -1 - другая строка больше
+	int compare(const String& other) const;
+
+	/// @brief Чистит строку
 	bool clear();
+
+	/// @brief Проверка на наличие символов в строке
+	/// @return True - пустая строка
+	/// @return False - не пустая строка
 	bool empty() const;
+
+	/// @brief Преобразование в const char*
 	const char* c_str() const;
+
+	/// @brief Меняет все буквы в строке на строчные 
+	String& to_lower();
 
 	/// @brief Получить длину без учета 0-терминатора
 	int  length() const;

@@ -28,7 +28,7 @@ String::String(const char* zStr)
 String::String(const String& str)
 	: m_storage(nullptr)
 {
-	char* pBegin = m_storage = new char[str.length()];
+	char* pBegin = m_storage = new char[str.length() + 1];
 	const char* pInputBegin = str.m_storage;
 
 	for (; *pInputBegin != 0; pInputBegin++, pBegin++)
@@ -55,6 +55,16 @@ const char* String::c_str() const
 	return m_storage;
 }
 
+String& String::to_lower()
+{
+	for (char* pBegin = m_storage; *pBegin != 0; pBegin++)
+	{
+		*pBegin = cstrings::lower(*pBegin);
+	}
+
+	return *this;
+}
+
 int String::length() const
 {
 	int len = 0;
@@ -70,17 +80,64 @@ int String::length() const
 	for (; *pBegin != 0; pBegin++)
 		len++;
 
-	if (*pBegin == 0)
-		len++;
-
 	return len;
+}
+
+int String::compare(const String& other) const
+{
+	// проверка nullptr 
+	if (m_storage == nullptr && other.m_storage == nullptr)
+	{
+		return 0; // одинаковые
+	}
+	else if (m_storage == nullptr)
+	{
+		return -1; // this меньше чем other
+	}
+	else if (other.m_storage == nullptr)
+	{
+		return 1; // this больше чем other
+	}
+
+	// проверка больше/меньше от начала до конца строки
+	const char* pMyBegin = m_storage;
+	const char* pOtherBegin = other.m_storage;
+
+	for (; *pMyBegin != 0 && *pOtherBegin != 0; pMyBegin++, pOtherBegin++)
+	{
+		const char char1 = cstrings::lower(*pMyBegin);
+		const char char2 = cstrings::lower(*pOtherBegin);
+
+		if (char1 < char2)
+		{
+			return -1; // номер символа в this меньше чем в other
+		}
+		else if (char1 > char2)
+		{
+			return 1; // номер символа в this больше чем в other
+		}
+	}
+
+	// проверка разницы размера строк
+	//if (*pMyBegin == 0 && *pOtherBegin == 0)
+	//{
+	//	return 0; // одинаковые
+	//}
+	//else if (*pMyBegin == 0)
+	//{
+	//	return -1; // this меньше чем other
+	//}	
+	//else if (*pOtherBegin == 0)
+	//{
+	//	return 1; // this больше чем other
+	//}
 }
 
 bool String::clear()
 {
 	if (m_storage != nullptr)
 	{
-		delete m_storage;
+		delete[] m_storage;
 		m_storage = nullptr;
 	}
 
